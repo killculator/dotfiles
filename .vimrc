@@ -2,11 +2,8 @@
 colorscheme darcula 
 
 """ customizations """
-set path=.,,**
-setlocal path = "/usr/local/Cellar/**2/include/**2"
-set nocompatible
+set path=$PWD/**
 set autochdir
-set autoread
 set ttyfast
 set visualbell
 set wildmenu
@@ -14,42 +11,27 @@ set lazyredraw
 set showmatch
 set incsearch
 set hlsearch
-set number
-set autowrite
-set laststatus=2
-set clipboard=unnamedplus
+set regexpengine=1
 set encoding=utf-8
 filetype plugin indent on
-set cursorline
 set ignorecase
+set statusline=2
 set spell spelllang=en_us
-set viminfo='100,<1000,s1000
-set directory^=$HOME/.vim/swap//
 set backspace=indent,eol,start
-"no delay entering normal mode
-set timeoutlen=1000 ttimeoutlen=0
 let mapleader = ","
 
 " status line
 set statusline =%0*\%f              " file path 
 set statusline+=\ \ %r%w%m\ \       " modified, ro
-set statusline+=\ %=b%n\            " buffer number 
-set statusline+=\%p%%\ %L\ \        " line no. and pct
+set statusline+=\%=%p%%\ %L\ \        " line no. and pct
 
 "persistent splits
 command Bd b#|bd #
 
-au InsertEnter * set norelativenumber 
-au InsertLeave * set relativenumber
-
-"DiffOrig
-command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
-
-"autosave
-"autocmd InsertLeave <buffer> write
+autocmd InsertLeave <buffer> write
 " save automatically when text is changed
 set updatetime=200
-au CursorHold * silent! update
+au CursorHold * update
 
 """ keybinds """
 
@@ -63,13 +45,16 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+"cycle line numberings
+nnoremap <silent> <Leader>l :exec &nu==&rnu? "se nu!" : "se rnu!"<CR>
+
 "buffer cycling
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
 
 "retain folds
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
+"autocmd BufWinLeave *.* mkview
+"autocmd BufWinEnter *.* silent loadview
 
 """ netrw """
 let g:netrw_liststyle = 3
@@ -84,7 +69,7 @@ nnoremap <silent> <Leader>e :Lexplore<cr>
 """ lang config """
 
 "tags
-:set tags=~/mytags
+:set tags=~/.mytags
 
 "python
 au Filetype python set
@@ -97,6 +82,3 @@ au Filetype python set
     \  fileformat=unix
 let python_highlight_all=1
 syntax on
-
-"java
-let java_highlight_all=1
