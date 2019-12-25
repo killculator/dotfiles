@@ -1,13 +1,12 @@
-#
-# ~/.profile
-#
+PATH="${HOME}/bin:/usr/local/bin/mongod:${PATH}"
 
-. ~/.zshrc
+export EDITOR='nvim'
+export HISTFILE="${HOME}/.sh_history"
 
-export CHARSET='UTF-8'
-export ENV="${HOME}/.profile"
-export HISTFILE="${HOME}/.zsh_history"
-export LANG='en_US.UTF-8'
-export LC_ALL='en_US.UTF-8'
-export PATH="${HOME}/bin:${PATH}"
-export PATH=`pwd`/depot_tools:"$PATH"
+alias brewski='brew update; brew upgrade; brew cask upgrade; brew cleanup -s'
+alias ls='ls -lAFGh'
+alias vi="${EDITOR}"
+
+set -o emacs
+
+PS1='$(echo "${PWD##*/}") $(echo -e "\e[1;37m")❯$(echo -e "\e[0m") '

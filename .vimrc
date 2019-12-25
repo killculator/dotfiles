@@ -1,26 +1,14 @@
-""" theme """
-set background=dark
-colorscheme snow
-
-""" customizations """
 syntax on
-set path+=**
+imap jj <Esc>
+set path=~/code/**
+set wildignore+=*/node_modules/*,*/__pycache__/*,*/target/*,*/venv/*
+set undodir=~/.vim/undo
+set backspace=indent,eol,start
+set updatetime=1200
 set belloff=all
 set ignorecase
-set undodir=~/.vim/undo
 set undofile
-set updatetime=200
+set nowrap
 filetype plugin indent on
-imap jj <Esc>
-
-"persistent splits
-command Bd b#|bd #
-
-" autosave excluding terminal buffers
-au CursorHold * if &buftype != 'terminal'| update | endif
-
-"cycle line numberings
-nnoremap <silent> <S-l> :exec &nu==&rnu? "se nu!" : "se rnu!"<CR>
-
-""" dirvish """
-autocmd FileType dirvish nnoremap <silent><buffer> gh :silent keeppatterns g@\v/\.[^\/]+/?$@d _<cr>:setl cole=3<cr>
+au CursorHold,CursorHoldI * update
+au BufReadPost *.svelte set syntax=html
